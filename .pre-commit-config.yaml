@@ -1,0 +1,44 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+
+default_stages: [commit, manual]
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml # Checks yaml files for parseable syntax.
+      - id: check-json # Checks json files for parseable syntax.
+      - id: check-added-large-files
+      - id: check-case-conflict # Check for files that would conflict in case-insensitive filesystems
+      - id: check-merge-conflict # Check for files that contain merge conflict strings.
+      - id: debug-statements # Check for debugger imports and py37+ `breakpoint()` calls in python source.
+  - repo: https://github.com/terraform-docs/terraform-docs
+    rev: v0.16.0
+    hooks:
+      - id: terraform-docs-go
+        args: ["markdown", "table", "--output-file", "README.md", "./"]
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.77.1
+    hooks:
+      - id: terraform_fmt
+      - id: terraform_validate
+      - id: terraform_tflint
+        args:
+          - --args=--module
+          - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
+  - repo: https://github.com/bridgecrewio/checkov.git
+    rev: "2.4.48"
+    hooks:
+      - id: checkov
+        name: Checkov
+        description: This hook runs checkov.
+        entry: checkov -d .
+        language: python
+        pass_filenames: false
+        always_run: false
+        files: \.tf$
+        exclude: \.+.terraform\/.*$
+        require_serial: true
