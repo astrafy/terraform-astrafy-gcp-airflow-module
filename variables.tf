@@ -130,13 +130,20 @@ variable "k8s_git_sync_secret_name" {
   default     = "gitsync-creds"
 }
 
+variable "k8s_tasks_namespace_name" {
+  type        = string
+  description = "Name of the Kubernetes namespace where the Airflow tasks will be run"
+  default     = "airflow-tasks"
+
+}
+
 /******************************************
-  Airflow
+  Airflow Deployment
 *****************************************/
 
 variable "deploy_airflow" {
   type        = bool
-  description = "Create Airflow with the helm chart"
+  description = "Deploy Airflow with the helm chart"
   default     = false
 }
 
@@ -151,3 +158,27 @@ variable "airflow_values_filepath" {
   description = "Airflow helm chart values file path"
   default     = null
 }
+
+/******************************************
+  Airflow logging
+*****************************************/
+
+# If airflow_logs_bucket_name is set to null, no airflow logging resources will be created
+variable "airflow_logs_bucket_name" {
+  type        = string
+  description = "Name of the bucket in which to store the Airflow logs"
+  default     = null
+}
+
+variable "airflow_logs_bucket_location" {
+  type        = string
+  description = "Location of the bucket in which to store the Airflow logs"
+  default     = "EU"
+}
+
+variable "airflow_logs_sa" {
+  type        = string
+  description = "Service account with admin access to the bucket where Airflow writes the logs"
+  default     = null
+}
+
