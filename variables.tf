@@ -130,13 +130,6 @@ variable "k8s_git_sync_secret_name" {
   default     = "gitsync-creds"
 }
 
-variable "k8s_tasks_namespace_name" {
-  type        = string
-  description = "Name of the Kubernetes namespace where the Airflow tasks will be run"
-  default     = "airflow-tasks"
-
-}
-
 /******************************************
   Airflow Deployment
 *****************************************/
@@ -181,4 +174,3 @@ variable "airflow_logs_sa" {
   description = "Service account with admin access to the bucket where Airflow writes the logs"
   default     = null
 }
-

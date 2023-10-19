@@ -35,9 +35,12 @@ No modules.
 | Name | Type |
 |------|------|
 | [github_repository_deploy_key.airflow_deploy_key](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_deploy_key) | resource |
+| [google_service_account.airflow_logger](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account) | resource |
 | [google_sql_database.airflow](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database) | resource |
 | [google_sql_database_instance.airflow_db](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database_instance) | resource |
 | [google_sql_user.db_user](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_user) | resource |
+| [google_storage_bucket.airflow_logs](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket) | resource |
+| [google_storage_bucket_iam_member.airflow_logger_admin](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket_iam_member) | resource |
 | [helm_release.airflow](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
 | [kubernetes_secret_v1.airflow_db_credentials](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret_v1) | resource |
 | [kubernetes_secret_v1.fernet_key_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret_v1) | resource |
@@ -52,11 +55,14 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_airflow_logs_bucket_location"></a> [airflow\_logs\_bucket\_location](#input\_airflow\_logs\_bucket\_location) | Location of the bucket in which to store the Airflow logs | `string` | `"EU"` | no |
+| <a name="input_airflow_logs_bucket_name"></a> [airflow\_logs\_bucket\_name](#input\_airflow\_logs\_bucket\_name) | Name of the bucket in which to store the Airflow logs | `string` | `null` | no |
+| <a name="input_airflow_logs_sa"></a> [airflow\_logs\_sa](#input\_airflow\_logs\_sa) | Service account with admin access to the bucket where Airflow writes the logs | `string` | `null` | no |
 | <a name="input_airflow_values_filepath"></a> [airflow\_values\_filepath](#input\_airflow\_values\_filepath) | Airflow helm chart values file path | `string` | `null` | no |
 | <a name="input_airflow_version"></a> [airflow\_version](#input\_airflow\_version) | Airflow helm chart version | `string` | `"1.10.0"` | no |
 | <a name="input_allocated_ip_range"></a> [allocated\_ip\_range](#input\_allocated\_ip\_range) | Allocated IP range for the SQL instance | `string` | `null` | no |
 | <a name="input_dags_repository"></a> [dags\_repository](#input\_dags\_repository) | Name of the GitHub repository where the DAGs are stored | `string` | n/a | yes |
-| <a name="input_deploy_airflow"></a> [deploy\_airflow](#input\_deploy\_airflow) | Create Airflow with the helm chart | `bool` | `false` | no |
+| <a name="input_deploy_airflow"></a> [deploy\_airflow](#input\_deploy\_airflow) | Deploy Airflow with the helm chart | `bool` | `false` | no |
 | <a name="input_deploy_cloud_sql"></a> [deploy\_cloud\_sql](#input\_deploy\_cloud\_sql) | Deploy Cloud SQL | `bool` | `true` | no |
 | <a name="input_deploy_github_keys"></a> [deploy\_github\_keys](#input\_deploy\_github\_keys) | Create a GitHub Key and a secret in k8s to access the private dags | `bool` | `true` | no |
 | <a name="input_k8s_airflow_fernet_key_secret_name"></a> [k8s\_airflow\_fernet\_key\_secret\_name](#input\_k8s\_airflow\_fernet\_key\_secret\_name) | Name of the Kubernetes secret where fernet key will be stored | `string` | `"fernet-key"` | no |
@@ -83,5 +89,6 @@ No modules.
 | <a name="output_airflow_db_credentials_secret"></a> [airflow\_db\_credentials\_secret](#output\_airflow\_db\_credentials\_secret) | n/a |
 | <a name="output_airflow_fernet_key_secret"></a> [airflow\_fernet\_key\_secret](#output\_airflow\_fernet\_key\_secret) | n/a |
 | <a name="output_airflow_git_sync_secret"></a> [airflow\_git\_sync\_secret](#output\_airflow\_git\_sync\_secret) | n/a |
+| <a name="output_airflow_logger_sa"></a> [airflow\_logger\_sa](#output\_airflow\_logger\_sa) | n/a |
 | <a name="output_airflow_webserver_secret_key_secret"></a> [airflow\_webserver\_secret\_key\_secret](#output\_airflow\_webserver\_secret\_key\_secret) | n/a |
 <!-- END_TF_DOCS -->

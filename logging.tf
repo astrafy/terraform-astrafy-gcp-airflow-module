@@ -1,8 +1,9 @@
 resource "google_storage_bucket" "airflow_logs" {
-  count    = var.airflow_logs_bucket_name != null ? 1 : 0
-  project  = var.project_id
-  name     = var.airflow_logs_bucket_name
-  location = var.airflow_logs_bucket_location
+  count                    = var.airflow_logs_bucket_name != null ? 1 : 0
+  project                  = var.project_id
+  name                     = var.airflow_logs_bucket_name
+  location                 = var.airflow_logs_bucket_location
+  public_access_prevention = "enforced"
 }
 
 resource "google_service_account" "airflow_logger" {
