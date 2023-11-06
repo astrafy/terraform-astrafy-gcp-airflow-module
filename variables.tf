@@ -174,3 +174,25 @@ variable "airflow_logs_sa" {
   description = "Service account with admin access to the bucket where Airflow writes the logs"
   default     = null
 }
+
+/******************************************
+  Reddis
+*****************************************/
+
+variable "create_redis_secrets" {
+  type        = bool
+  description = "Create the redis secrets to be used by the helm chart"
+  default     = true
+}
+
+variable "redis_password_secret_name" {
+  type        = string
+  description = "Name of the secret that stores the redis password"
+  default     = "airflow-redis-password"
+}
+
+variable "broker_url_secret_name" {
+  type        = string
+  description = "Name of the secret that stores the redis password"
+  default     = "airflow-broker-url"
+}

@@ -50,3 +50,31 @@ resource "kubernetes_secret_v1" "gitsync_creds" {
     gitSshKey = tls_private_key.github_deploy_key[0].private_key_openssh
   }
 }
+
+resource "random_password" "redis_password" {
+  count   = var.create_redis_secrets ? 1 : 0
+  length  = 12
+  special = false
+}
+
+resource "kubernetes_secret_v1" "redis_password" {
+  count = var.create_redis_secrets ? 1 : 0
+  metadata {
+    name      = var.redis_password_secret_name
+    namespace = var.k8s_airflow_namespace
+  }
+  data = {
+    password = random_password.redis_password[0].result
+  }
+}
+
+resource "kubernetes_secret_v1" "broker_url" {
+  count = var.create_redis_secrets ? 1 : 0
+  metadata {
+    name      = var.broker_url_secret_name
+    namespace = var.k8s_airflow_namespace
+  }
+  data = {
+    connection = "redis://:${random_password.redis_password[0].result}@airflow-redis:6379/0"
+  }
+}
