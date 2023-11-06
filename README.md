@@ -43,11 +43,14 @@ No modules.
 | [google_storage_bucket_iam_member.airflow_logger_admin](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket_iam_member) | resource |
 | [helm_release.airflow](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
 | [kubernetes_secret_v1.airflow_db_credentials](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret_v1) | resource |
+| [kubernetes_secret_v1.broker_url](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret_v1) | resource |
 | [kubernetes_secret_v1.fernet_key_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret_v1) | resource |
 | [kubernetes_secret_v1.gitsync_creds](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret_v1) | resource |
+| [kubernetes_secret_v1.redis_password](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret_v1) | resource |
 | [kubernetes_secret_v1.webserver_secret_key](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret_v1) | resource |
 | [random_password.db_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [random_password.fernet_key](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
+| [random_password.redis_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [random_password.webserver_secret_key](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [tls_private_key.github_deploy_key](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource |
 
@@ -61,6 +64,8 @@ No modules.
 | <a name="input_airflow_values_filepath"></a> [airflow\_values\_filepath](#input\_airflow\_values\_filepath) | Airflow helm chart values file path | `string` | `null` | no |
 | <a name="input_airflow_version"></a> [airflow\_version](#input\_airflow\_version) | Airflow helm chart version | `string` | `"1.10.0"` | no |
 | <a name="input_allocated_ip_range"></a> [allocated\_ip\_range](#input\_allocated\_ip\_range) | Allocated IP range for the SQL instance | `string` | `null` | no |
+| <a name="input_broker_url_secret_name"></a> [broker\_url\_secret\_name](#input\_broker\_url\_secret\_name) | Name of the secret that stores the redis password | `string` | `"airflow-broker-url"` | no |
+| <a name="input_create_redis_secrets"></a> [create\_redis\_secrets](#input\_create\_redis\_secrets) | Create the redis secrets to be used by the helm chart | `bool` | `true` | no |
 | <a name="input_dags_repository"></a> [dags\_repository](#input\_dags\_repository) | Name of the GitHub repository where the DAGs are stored | `string` | n/a | yes |
 | <a name="input_deploy_airflow"></a> [deploy\_airflow](#input\_deploy\_airflow) | Deploy Airflow with the helm chart | `bool` | `false` | no |
 | <a name="input_deploy_cloud_sql"></a> [deploy\_cloud\_sql](#input\_deploy\_cloud\_sql) | Deploy Cloud SQL | `bool` | `true` | no |
@@ -71,6 +76,7 @@ No modules.
 | <a name="input_k8s_git_sync_secret_name"></a> [k8s\_git\_sync\_secret\_name](#input\_k8s\_git\_sync\_secret\_name) | Name of the secret where the token to syncronize the dags in GitHub is stored | `string` | `"gitsync-creds"` | no |
 | <a name="input_k8s_webserver_secret_key_secret_name"></a> [k8s\_webserver\_secret\_key\_secret\_name](#input\_k8s\_webserver\_secret\_key\_secret\_name) | Name of the Kubernetes secret where webserver secret key will be stored | `string` | `"webserver-secret-key"` | no |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | ID of the project where to create the Airflow Resources | `string` | n/a | yes |
+| <a name="input_redis_password_secret_name"></a> [redis\_password\_secret\_name](#input\_redis\_password\_secret\_name) | Name of the secret that stores the redis password | `string` | `"airflow-redis-password"` | no |
 | <a name="input_region"></a> [region](#input\_region) | Region of the project where to create the Airflow Resources | `string` | n/a | yes |
 | <a name="input_require_ssl"></a> [require\_ssl](#input\_require\_ssl) | Require SSL for the SQL instance | `bool` | `false` | no |
 | <a name="input_sql_database_name"></a> [sql\_database\_name](#input\_sql\_database\_name) | SQL instance name | `string` | `"airflow"` | no |
