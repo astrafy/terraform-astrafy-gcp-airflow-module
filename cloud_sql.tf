@@ -8,10 +8,10 @@ resource "google_sql_database_instance" "airflow_db" {
 
   deletion_protection = var.sql_delete_protection
 
-
   settings {
-    tier    = var.sql_tier
-    edition = var.sql_edition
+    tier              = var.sql_tier
+    edition           = var.sql_edition
+    availability_type = var.sql_availability_type
 
     ip_configuration {
       ipv4_enabled                                  = var.sql_private_network == null ? true : false

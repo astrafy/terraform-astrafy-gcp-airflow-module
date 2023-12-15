@@ -82,6 +82,12 @@ variable "sql_delete_protection" {
   default     = true
 }
 
+variable "sql_availability_type" {
+  type        = string
+  description = "SQL availability type. Can be ZONAL or REGIONAL"
+  default     = "ZONAL"
+}
+
 /******************************************
   GitHub
 *****************************************/
